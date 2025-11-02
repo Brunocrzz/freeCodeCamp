@@ -543,6 +543,40 @@ describe('buildSuperblock pure functions', () => {
       ]);
       expect(result).toHaveLength(6);
     });
+
+    test('should throw error when a chapter has no modules and no other blocks found', () => {
+      const chapterWithoutModulesMock = {
+        chapters: [
+          {
+            dashedName: 'chapter-without-modules',
+          }
+        ]
+      };
+
+      expect(() => transformSuperBlock(chapterWithoutModulesMock)).toThrow(
+        'No blocks found in superblock data'
+      );
+    });
+
+    test('should throw error when a module has no blocks', () => {
+      const moduleWithoutBlocksMock = {
+        chapters: [
+          {
+            dashedName: 'chapter-with-module-no-blocks',
+            modules: [
+              {
+                dashedName: 'module-without-blocks',
+                blocks: null
+              }
+            ]
+          }
+        ]
+      };
+      
+      expect(() => transformSuperBlock(moduleWithoutBlocksMock)).toThrow(
+        'No blocks found in superblock data'
+      );
+    });
   });
 });
 
