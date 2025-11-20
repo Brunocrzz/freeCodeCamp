@@ -8,7 +8,7 @@ function plugin() {
   function transformer(tree, file) {
     const hintNodes = getSection(tree, '--hints--');
     if (hintNodes.length % 2 !== 0)
-      throw Error('Tests must be in (text, ```testString```) order');
+      throw Error('A paragraph in the hints section must be followed by a tests section (```js).');
 
     const tests = chunk(hintNodes, 2).map(getTest);
     file.data.tests = tests;

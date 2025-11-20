@@ -38,11 +38,9 @@ describe('add-tests plugin', () => {
     expect(typeof testObject.text).toBe('string');
   });
 
-  // TODO: make this a bit more robust and informative
   it('should throw if a test pair is out of order', () => {
-    // TODO: update the markdown so it makes this error
     expect(() => plugin(brokenHintsAST, file)).toThrow(
-      'Tests must be in (text, ```testString```) order'
+      'A paragraph in the hints section must be followed by a tests section (```js).'
     );
   });
 
